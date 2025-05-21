@@ -6,51 +6,95 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 [![Live Demo](https://img.shields.io/badge/demo-live-orange)](https://dora-urdu-voice-scheduler.vercel.app/)
 
-*Schedule events using Urdu voice commands and Google Calendar integration*
-
-[Features](#features) • [Demo](#live-demo) • [Getting Started](#getting-started) • [Usage](#usage) • [Contributing](#contributing) • [Roadmap](#roadmap)
+*An intelligent voice-powered scheduling assistant with natural language understanding in Urdu*
 
 </div>
 
-## 🌟 Overview
+## 🌟 Project Overview
 
-DORA is a modern web application that enables users to schedule calendar events using **Urdu voice commands**, providing a seamless integration with Google Calendar. The application leverages cutting-edge technologies to deliver a responsive and intuitive user experience.
+**DORA** is an advanced web application that enables users to schedule calendar events using **Urdu voice commands**. Built with modern web technologies, DORA transcribes Urdu speech into text, extracts event details, and automatically schedules them in Google Calendar. The application also features a sophisticated RAG-based chatbot that can answer questions about scheduled events by retrieving relevant information from a vector database.
+
+This project demonstrates the practical application of voice technology, natural language processing, and semantic search to create a seamless, accessible scheduling experience for Urdu-speaking users.
+
+## 📋 Table of Contents
+
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Live Demo](#-live-demo)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Project Structure](#️-project-structure)
+- [Contributing](#-contributing)
+- [Roadmap](#️-roadmap)
+- [License](#-license)
+- [Acknowledgements](#-acknowledgements)
+- [Contributors](#-contributors)
 
 ## ✨ Features
 
-- **🗣️ Urdu Voice Scheduling** - Record voice commands in Urdu to create events
-- **📆 Google Calendar Integration** - View, create, update, and delete calendar events
-- **🔐 Secure Authentication** - Google OAuth via NextAuth.js
-- **📱 Responsive Design** - Optimized for all devices
-- **🐞 Debug Tools** - Real-time debugging information
+### 🎤 Voice Transcription
+- Records Urdu voice input through an intuitive interface
+- Leverages **OpenAI's Whisper API** for accurate transcription of Urdu speech
+- Supports various Urdu dialects and accents
+
+### 📝 Task Extraction
+- Analyzes transcribed text using **OpenAI's GPT-4o** model
+- Intelligently extracts event details such as title, date, time, location, and participants
+- Handles relative time expressions in Urdu (e.g., "کل" for tomorrow, "اگلے ہفتے" for next week)
+- Ensures all events are scheduled for future dates
+
+### 🤖 Chatbot Integration
+- Implements a **Retrieval-Augmented Generation (RAG)** architecture
+- Stores event data as **BERT embeddings** in **Pinecone** vector database
+- Enables semantic search for retrieving relevant calendar information
+- Answers natural language queries about scheduled events (e.g., "When is my meeting with Abdullah Arif?")
+- Provides contextual responses based on the user's calendar data
+
+### 🔐 Authentication
+- Secure authentication using **Google OAuth 2.0** via **NextAuth.js**
+- Protects user data and calendar access
+- Maintains persistent sessions with JWT tokens
+
+### 📅 Calendar Integration
+- Seamless integration with **Google Calendar API**
+- View, create, edit, and delete calendar events
+- Multiple calendar views (day, week, month)
+- Real-time synchronization of events
+
+### 🌐 Additional Features
+- **Responsive Design**: Optimized for mobile, tablet, and desktop
+- **Timezone Management**: Support for various timezones
+- **Debug Tools**: Real-time debugging information
+- **RTL Support**: Right-to-left layout for Urdu interface
 
 ## 🔧 Tech Stack
 
 <div align="center">
 
-| Frontend | Backend | APIs | Authentication |
-|:--------:|:-------:|:----:|:-------------:|
-| Next.js | Node.js | Google Calendar | NextAuth.js |
-| React | API Routes | OpenAI Whisper | Google OAuth |
-| Tailwind CSS | | Web Speech API | |
-| Radix UI | | | |
+| Frontend | Backend | AI & Data | Authentication |
+|:--------:|:-------:|:---------:|:-------------:|
+| Next.js | Node.js | OpenAI Whisper | NextAuth.js |
+| React | API Routes | GPT-4o | Google OAuth |
+| Tailwind CSS | TypeScript | Pinecone | JWT |
+| Radix UI | date-fns-tz | BERT Embeddings | |
 
 </div>
 
 ## 🚀 Live Demo
 
-Try out DORA at: [https://dora-urdu-voice-scheduler.vercel.app/](https://dora-urdu-voice-scheduler.vercel.app/)
+Experience DORA at: [https://dora-urdu-voice-scheduler.vercel.app/](https://dora-urdu-voice-scheduler.vercel.app/)
 
-## 📋 Getting Started
+## 📋 Installation
 
 ### Prerequisites
 
 - **Node.js** (v16+)
 - **pnpm** package manager
 - **Google Cloud Project** with Calendar API enabled
-- **OpenAI API Key** for Whisper transcription
+- **OpenAI API Key** for Whisper transcription and GPT models
+- **Pinecone API Key** for vector database
 
-### Installation
+### Setup Steps
 
 1. **Clone the repository**
    ```bash
@@ -66,76 +110,102 @@ Try out DORA at: [https://dora-urdu-voice-scheduler.vercel.app/](https://dora-ur
 3. **Configure environment variables**
 
    Create a `.env.local` file in the root directory:
-   ```
+   ```env
+   # Authentication
    GOOGLE_CLIENT_ID=your-google-client-id
    GOOGLE_CLIENT_SECRET=your-google-client-secret
-   OPENAI_API_KEY=your-openai-api-key
    NEXTAUTH_SECRET=your-nextauth-secret
    NEXTAUTH_URL=http://localhost:3000
+   
+   # OpenAI
+   OPENAI_API_KEY=your-openai-api-key
+   
+   # Pinecone
+   PINECONE_API_KEY=your-pinecone-api-key
    ```
 
-### Development
+4. **Set up Pinecone Index**
+   
+   Create an index in your Pinecone dashboard with the following configuration:
+   - Name: `dorag`
+   - Dimensions: `1024`
+   - Metric: `cosine`
 
-```bash
-# Start development server
-pnpm dev
+5. **Start the development server**
+   ```bash
+   pnpm dev
+   ```
 
-# Build for production
-pnpm build
-
-# Start production server
-pnpm start
-```
-
-Access the application at `http://localhost:3000`
+6. Access the application at `http://localhost:3000`
 
 ## 🔍 Usage
 
+### Voice Scheduling Workflow
+
 1. **Sign in** with your Google account
-2. **Record Voice** - Click the "Record" button and speak in Urdu
-3. **Manage Events** - Create, view, update or delete events
-4. **Review** - Check the debug section for processing information
+2. **Record your voice** by clicking the microphone button and speaking your event details in Urdu
+3. **Review the extracted event** details that appear after processing
+4. **Confirm or edit** the event before adding it to your calendar
+5. **View your calendar** to see the newly created event
 
-### Voice Command Flow
+### Chatbot Interaction
 
-```mermaid
-graph LR
-    A[Record Voice] --> B[Transcribe with Whisper API]
-    B --> C[Process Command]
-    C --> D[Create Google Calendar Event]
-    D --> E[Confirm to User]
+1. Type a question in the chat interface, such as "میری عبداللہ عارف کے ساتھ ملاقات کب ہے؟" (When is my meeting with Abdullah Arif?)
+2. The chatbot will:
+   - Convert your question into vector embeddings
+   - Query the Pinecone database for similar vectors
+   - Retrieve relevant event information
+   - Generate a contextual response
+
+### Calendar Management
+
+- Switch between **day**, **week**, and **month** views
+- Navigate through time periods using the navigation controls
+- Click on events to view details or make edits
+- Delete events as needed
+
+## 🗂️ Project Structure
+
 ```
-
-## 💡 Core Functionality
-
-- **Voice Processing** - Records Urdu speech and transcribes it via OpenAI Whisper API
-- **Natural Language Understanding** - Extracts event details from transcribed text
-- **Calendar Management** - Creates, updates, and deletes events in Google Calendar
-- **Authentication** - Secures user data with Google OAuth
+dora-a3/
+├── app/                # Next.js app routes and layouts
+├── components/         # React components
+│   ├── calendar-view.tsx     # Calendar display component
+│   ├── debug-info.tsx        # Debugging information panel
+│   ├── timezone-selector.tsx # Timezone selection component
+│   ├── voice-recorder.tsx    # Voice recording interface
+│   └── ...                   # Other UI components
+├── lib/                # Utility functions and services
+│   ├── auth.ts               # Authentication configuration
+│   ├── calendar-api.ts       # Google Calendar API integration
+│   ├── chatWithBot.ts        # RAG chatbot implementation
+│   ├── date-utils.ts         # Date formatting utilities
+│   ├── extract-event.ts      # Event extraction from transcription
+│   └── transcribe.ts         # Voice transcription service
+├── public/             # Static assets
+└── styles/             # Global styles
+```
 
 ## 👥 Contributing
 
-Contributions are welcome! To contribute:
+Contributions to DORA are welcome! Here's how you can contribute:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to your branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. **Fork** the repository
+2. **Create a branch** (`git checkout -b feature/amazing-feature`)
+3. **Make changes** following our coding standards
+4. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+5. **Push** to your branch (`git push origin feature/amazing-feature`)
+6. Open a **Pull Request**
 
-Please ensure your code follows the project's coding standards and includes tests where applicable.
+Please ensure your code follows the project's coding style and includes appropriate tests and documentation.
 
 ## 🗺️ Roadmap
 
-- **🤖 Chatbot Interface** - Interactive scheduling experience
-- **👥 Multi-User Support** - Independent calendar management for teams
-- **🔊 Enhanced Voice Recognition** - Improved Urdu language processing
-- **📱 Mobile App** - Native iOS and Android applications
-- **🌙 Dark Mode** - Enhanced visual experience
-- **🌐 Multi-Language Support** - Extend beyond Urdu
-- **📊 Analytics Dashboard** - Insights into scheduled events
-- **📴 Offline Support** - Function without internet connection
-- **🔄 Event Collaboration** - Share and collaborate on events
+- **Multi-User Support** - Team calendar management
+- **Enhanced Voice Recognition** - Improved Urdu language processing
+- **Mobile Applications** - Native iOS and Android versions
+- **Expanded Language Support** - Additional South Asian languages
+- **Advanced Analytics** - Calendar usage insights and suggestions
 
 ## 📜 License
 
@@ -143,20 +213,23 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgements
 
-- [Next.js](https://nextjs.org/) - React framework
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [Radix UI](https://www.radix-ui.com/) - Unstyled, accessible components
-- [Google Calendar API](https://developers.google.com/calendar) - Calendar integration
-- [OpenAI Whisper](https://openai.com/research/whisper) - Speech recognition
-- [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) - Voice recording
+- [Next.js](https://nextjs.org/)
+- [OpenAI](https://openai.com/)
+- [Pinecone](https://www.pinecone.io/)
+- [Google Calendar API](https://developers.google.com/calendar)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Radix UI](https://www.radix-ui.com/)
 
-## Contributors
+## 👤 Contributors
+
+- [Abdullah Arif](https://github.com/abdullaharif381/) - Project Lead
 - [Ibtehaj Ali](https://github.com/Ibtehaj778/)
 - [Tahmooras Khan](https://www.linkedin.com/in/tahmooras-khan-8341452a1/)
-- [Kabir ud Din Shahab]([https://developers.google.com/calend](https://www.linkedin.com/in/kabir-ud-din-shahab-230469262/))
+- [Kabir ud Din Shahab](https://www.linkedin.com/in/kabir-ud-din-shahab-230469262/)
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by Abdullah Arif</sub>
+  <p>For support or inquiries, please <a href="https://github.com/abdullaharif381/dora-a3/issues">open an issue</a> on GitHub</p>
+  <sub>Built with ❤️ by the DORA team</sub>
 </div>
