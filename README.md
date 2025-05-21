@@ -92,19 +92,19 @@ Experience DORA at: [https://dora-urdu-voice-scheduler.vercel.app/](https://dora
 <div align="center">
 
 ### Login Screen
-![Login Screen](./public/screenshots/ss1-login.png)
+![Login Screen](./public/screenshots/ss1.png)
 
 ### Calendar View
-![Calendar View](./public/screenshots/ss3-calender-view.png)
+![Calendar View](./public/screenshots/ss3.png)
 
 ### Chatbot Interface
-![Chatbot Interface](./public/screenshots/ss4-chatbot.png)
+![Chatbot Interface](./public/screenshots/ss4.png)
 
 ### Voice Recording
-![Voice Recording](./public/screenshots/ss5-voice-recording.png)
+![Voice Recording](./public/screenshots/ss5.png)
 
 ### Event Parsing
-![Event Parsing](./public/screenshots/ss6-event-parsing.png)
+![Event Parsing](./public/screenshots/ss6.png)
 
 </div>
 
