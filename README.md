@@ -8,7 +8,7 @@
 
 *An intelligent voice-powered scheduling assistant with natural language understanding in Urdu*
 
-![DORA App](./public/screenshots/ss2-frontend.png)
+![DORA App](./public/screenshots/ss2.png)
 
 </div>
 
