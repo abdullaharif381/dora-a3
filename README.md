@@ -8,6 +8,8 @@
 
 *An intelligent voice-powered scheduling assistant with natural language understanding in Urdu*
 
+![DORA App](./public/screenshots/ss2-frontend.png)
+
 </div>
 
 ## 🌟 Project Overview
@@ -21,6 +23,7 @@ This project demonstrates the practical application of voice technology, natural
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Live Demo](#-live-demo)
+- [Screenshots](#-screenshots)
 - [Installation](#-installation)
 - [Usage](#-usage)
 - [Project Structure](#️-project-structure)
@@ -83,6 +86,27 @@ This project demonstrates the practical application of voice technology, natural
 ## 🚀 Live Demo
 
 Experience DORA at: [https://dora-urdu-voice-scheduler.vercel.app/](https://dora-urdu-voice-scheduler.vercel.app/)
+
+## 📸 Screenshots
+
+<div align="center">
+
+### Login Screen
+![Login Screen](./public/screenshots/ss1-login.png)
+
+### Calendar View
+![Calendar View](./public/screenshots/ss3-calender-view.png)
+
+### Chatbot Interface
+![Chatbot Interface](./public/screenshots/ss4-chatbot.png)
+
+### Voice Recording
+![Voice Recording](./public/screenshots/ss5-voice-recording.png)
+
+### Event Parsing
+![Event Parsing](./public/screenshots/ss6-event-parsing.png)
+
+</div>
 
 ## 📋 Installation
 
